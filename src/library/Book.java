@@ -46,10 +46,17 @@ public class Book {
             return this.isAvailable;
         }
         /* Fun challenge: The following single line of code does the same thing as the six lines above.
-            What looks unfamiliar to you? Can you figure out what the different parts are? What
-            are they each doing?
+           What looks unfamiliar to you? Can you figure out what the different parts are? What
+           are they each doing? In what ways is this approach better and worse than the one above?
          */
         //return (this.isAvailable ? !(this.isAvailable = false) : this.isAvailable);
+
+        /* Here is another approach that does exactly the same thing. Why does this work?
+           In what ways is this approach better and worse than the others above?
+        */
+        // boolean wasAvailable = isAvailable;
+        // isAvailable = false;
+        // return wasAvailable;
     }
 
     /**
@@ -66,10 +73,18 @@ public class Book {
             this.isAvailable = true;
             return this.isAvailable;
         }
+
         /* Fun challenge: The following single line of code does the same thing as the six lines above.
            What looks unfamiliar to you? Can you figure out what the different parts are? What
            are they each doing? In what ways is this approach better and worse than the one above?
          */
         //return (this.isAvailable ? !this.isAvailable : (this.isAvailable = true));
+
+        /* Here is another approach that does exactly the same thing. Why does this work?
+           In what ways is this approach better and worse than the others above?
+        */
+        // boolean wasAvailable = isAvailable;
+        // isAvailable = true;
+        // return !wasAvailable;
     }
 }
