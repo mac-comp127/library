@@ -60,17 +60,17 @@ public class LibraryMain {
 
 
         // begin user prompts
-        System.out.println("Enter a command to perform an action. Type \'help\' to see the list of commands, and \'quit\' to exit.");
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        while(!input.equalsIgnoreCase("quit")) { // quit to exit
+        while(true) {
+            System.out.println("\nEnter a command to perform an action. Type \'help\' to see the list of commands");
+            System.out.print("> ");
+            String input = sc.nextLine();
+            if (input.equalsIgnoreCase("quit")) { // quit to exit
+                break;
+            }
 
             if(input.equalsIgnoreCase("help")) { // print list of commands
-                System.out.println("The following commands are accepted:");
-                System.out.println("\'list\': list all library items and whether they are available");
-                System.out.println("\'checkout [title]\': checkout the item called [title]");
-                System.out.println("\'checkin [title]\': checkin the item called [title]");
-                System.out.println("\'quit\': exit the program");
+                showHelp();
 
             } else if (input.matches("checkout .+")) { // checking out an item
                 if (checkOut(input.substring(9), library)) {
@@ -86,21 +86,30 @@ public class LibraryMain {
                     System.out.println("Could not check in that title.");
                 }
 
-
             } else if (input.equalsIgnoreCase("list")) { // list all library items
-                System.out.println("\n-----\nLibrary Inventory\n-----\n");
-
-                // TODO: edit this to work for all Media items
-                for(Book book : library) {
-                    System.out.println(book.toString());
-                }
+                listBooks(library);
 
             } else { // invalid command
-                System.out.println("Enter a valid command");
+                System.out.println("Please enter a valid command");
             }
-
-            System.out.println("\nEnter a command to perform an action. Type \'help\' to see the list of commands");
-            input = sc.nextLine();
         }
+        sc.close();
+    }
+
+    private static void listBooks(List<Book> library) {
+        System.out.println("\n-----\nLibrary Inventory\n-----\n");
+
+        // TODO: edit this to work for all Media items
+        for(Book book : library) {
+            System.out.println(book.toString());
+        }
+    }
+
+    private static void showHelp() {
+        System.out.println("The following commands are accepted:");
+        System.out.println("\'list\': list all library items and whether they are available");
+        System.out.println("\'checkout [title]\': checkout the item called [title]");
+        System.out.println("\'checkin [title]\': checkin the item called [title]");
+        System.out.println("\'quit\': exit the program");
     }
 }
